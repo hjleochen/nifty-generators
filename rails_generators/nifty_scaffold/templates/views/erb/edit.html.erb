@@ -1,14 +1,14 @@
 <%% title "Edit <%= singular_name.titleize %>" %>
 
-<%= render_form %>
+<%%= render :partial => 'form',:locals=>{:form_options=>{:url=>resource_url}} %>
 
 <%- if actions? :show, :index -%>
 <p>
 <%- if action? :show -%>
-  <%%= link_to "Show", @<%= singular_name %> %> |
+  <%%= link_to "Show", resource_url %> |
 <%- end -%>
 <%- if action? :index -%>
-  <%%= link_to "View All", <%= plural_name %>_path %>
+  <%%= link_to "View All", collection_url %>
 <%- end -%>
 </p>
 <%- end -%>

@@ -2,12 +2,12 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('nifty-generators', '0.3.0') do |p|
+Echoe.new('leo-nifty-generators', '0.3.1') do |p|
   p.project        = "niftygenerators"
   p.description    = "A collection of useful generator scripts for Rails."
-  p.url            = "http://github.com/ryanb/nifty-generators"
-  p.author         = 'Ryan Bates'
-  p.email          = "ryan (at) railscasts (dot) com"
+  p.url            = "http://github.com/hjleochen/nifty-generators"
+  p.author         = 'H.J.Leochen'
+  p.email          = "hjleochen (at) hotmail (dot) com"
   p.ignore_pattern = ["script/*"]
   p.development_dependencies = []
 end

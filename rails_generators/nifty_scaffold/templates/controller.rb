@@ -1,3 +1,3 @@
-class <%= plural_class_name %>Controller < ApplicationController
-  <%= controller_methods :actions %>
+class <%= plural_class_name %>Controller < InheritedResources::Base 
+  <%#= controller_methods :actions %>
 end
