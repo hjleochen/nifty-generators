@@ -68,7 +68,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
       unless options[:skip_controller]
         m.directory "app/controllers"
-        m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+        if options[:use_ir]
+          m.template "controller_ir.rb", "app/controllers/#{plural_name}_controller.rb"
+        else
+          m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+        end
         
         m.directory "app/helpers"
         m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
@@ -219,6 +223,7 @@ protected
       options[:use_mongodb] = true
       options[:skip_migration] = v
     }
+    opt.on("--ir", "Use InheritedResources plugin.") { |v| options[:use_ir] = v }
   end
   
   # is there a better way to do this? Perhaps with const_defined?
