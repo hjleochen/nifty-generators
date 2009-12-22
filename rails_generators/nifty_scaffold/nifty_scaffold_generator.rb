@@ -44,7 +44,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     record do |m|
       unless options[:skip_model]
         m.directory "app/models"
-        m.template "model.rb", "app/models/#{singular_name}.rb"
+        if options[:use_mongodb]
+          m.template "model_mongodb.rb", "app/models/#{singular_name}.rb"
+        else
+          m.template "model.rb", "app/models/#{singular_name}.rb"
+        end
         unless options[:skip_migration]
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
@@ -61,7 +65,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
         end
       end
-      
+
       unless options[:skip_controller]
         m.directory "app/controllers"
         m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
@@ -211,6 +215,10 @@ protected
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
+    opt.on("--mongodb", "Use Mongodb.") { |v| 
+      options[:use_mongodb] = true
+      options[:skip_migration] = v
+    }
   end
   
   # is there a better way to do this? Perhaps with const_defined?
